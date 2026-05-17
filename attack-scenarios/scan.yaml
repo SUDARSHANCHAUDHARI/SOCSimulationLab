@@ -1,2 +1,4 @@
-# Scan for End-to-End SOC Simulation
-items: []
+# Scan scenario for End-to-End SOC Simulation
+items:
+  - category: scan
+    expected_signal: reconnaissance activity from one external source

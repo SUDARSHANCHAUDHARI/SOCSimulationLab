@@ -1,3 +1,14 @@
-# Gap Analysis
+# SOC Visibility Gap Analysis
 
-TODO: Document gap analysis for End-to-End SOC Simulation.
+- Expected signals: 3
+- Covered signals: 2
+- Missing signals: 1
+
+## Covered
+
+- login
+- scan
+
+## Missing
+
+- shell

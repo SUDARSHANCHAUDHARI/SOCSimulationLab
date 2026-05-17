@@ -1,2 +1,4 @@
-# Shell for End-to-End SOC Simulation
-items: []
+# Shell scenario for End-to-End SOC Simulation
+items:
+  - category: shell
+    expected_signal: outbound shell or command execution event

@@ -1,10 +1,15 @@
-"""Login Detection module for End-to-End SOC Simulation."""
+"""Detect suspicious login signals in collected SOC logs."""
+
+from __future__ import annotations
+
+from detections.types import Detection
 
 
-def main() -> None:
-    """Placeholder entry point."""
-    raise NotImplementedError("Implement login detection logic")
-
-
-if __name__ == "__main__":
-    main()
+def detect(lines: list[str]) -> list[Detection]:
+    detections: list[Detection] = []
+    for line in lines:
+        lower = line.lower()
+        if "failed password" in lower or "accepted password" in lower or "brute" in lower:
+            severity = "high" if "accepted password" in lower else "medium"
+            detections.append(Detection("login", "suspicious authentication activity", line, severity))
+    return detections

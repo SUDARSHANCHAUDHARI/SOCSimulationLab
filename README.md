@@ -16,13 +16,26 @@
 
 Keep this local and lab-only.
 
-## Status
+## Quick Start
 
-Scaffolded. Implementation pending.
+```bash
+python3 soc_simulation.py
+python3 -m unittest discover -s tests -p 'test_*.py'
+```
+
+The simulation uses safe synthetic logs. It does not run exploit tooling.
+
+## MVP Capabilities
+
+- Loads expected scan, login, and shell signals from scenario files
+- Runs deterministic detection logic against collected SOC logs
+- Builds an incident timeline
+- Builds a visibility gap report
+- Writes machine-readable detection output
 
 ## Repository Status
 
-This repository contains the production-ready foundation for the SOC Simulation Lab MVP. The current codebase is scaffolded and ready for focused implementation work.
+This repository contains a working safe SOC simulation MVP with scenario fixtures, detection mapping, timeline output, gap analysis, and tests.
 
 ## Production Foundation
 
@@ -34,4 +47,3 @@ This repository contains the production-ready foundation for the SOC Simulation 
 - Pull request and issue templates
 - Production readiness checklist
 - Safe ignore rules for local secrets and generated files
-
