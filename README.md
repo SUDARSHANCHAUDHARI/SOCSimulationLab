@@ -1,8 +1,21 @@
-# End-to-End SOC Simulation
+# SOC Simulation Lab
 
-**Goal:** Simulate full detection workflow.
+[![Python](https://img.shields.io/badge/Python-3.12-blue)](#) [![Status](https://img.shields.io/badge/status-MVP-green)](#) [![Security](https://img.shields.io/badge/security-defensive%20lab-purple)](#)
 
-**MVP:** Scan, exploit in lab, collect logs, build incident timeline.
+End-to-end SOC workflow simulator that maps attack scenarios to collected logs and visibility gaps.
+
+- **Portfolio group:** Cybersecurity lab project
+- **Status:** MVP implemented, tested, committed, and pushed to GitHub
+- **GitHub:** https://github.com/SUDARSHANCHAUDHARI/SOCSimulationLab
+- **Local path:** `/Users/screencloudsudarshan/SUDARSHAN_CODE/sudarshan_repos/CyberSecurity/SOCSimulationLab`
+
+## MVP Snapshot
+
+This repository includes a working MVP with safe sample data, deterministic detection or analysis logic, local tests, and generated output reports where relevant. It is ready for README/demo polish or deeper product work.
+
+## Safe Use
+
+This project is defensive and analysis-focused. Use only with logs, systems, repositories, and lab environments you own or have permission to assess.
 
 ## Core Features
 
@@ -33,17 +46,10 @@ The simulation uses safe synthetic logs. It does not run exploit tooling.
 - Builds a visibility gap report
 - Writes machine-readable detection output
 
-## Repository Status
+## Roadmap
 
-This repository contains a working safe SOC simulation MVP with scenario fixtures, detection mapping, timeline output, gap analysis, and tests.
-
-## Production Foundation
-
-- Private GitHub repository linked to `main`
-- Initial MVP scaffold committed
-- CI repository-health workflow
-- Security policy
-- Contribution guide
-- Pull request and issue templates
-- Production readiness checklist
-- Safe ignore rules for local secrets and generated files
+- Polish sample output screenshots or terminal demos
+- Add architecture diagram and deeper implementation notes
+- Expand test coverage around edge cases
+- Add Docker or local demo workflow where useful
+- Prepare `v0.1.0-mvp` release notes
