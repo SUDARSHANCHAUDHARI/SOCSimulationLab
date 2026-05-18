@@ -3,18 +3,30 @@
     "category": "scan",
     "title": "reconnaissance activity",
     "evidence": "2026-05-18T12:00:01Z firewall scan src=198.51.100.77 dst=10.0.0.20 ports=22,80,443,8080",
-    "severity": "medium"
+    "severity": "medium",
+    "timestamp": "2026-05-18T12:00:01Z",
+    "source": "198.51.100.77",
+    "mitre_tactic": "Reconnaissance",
+    "recommended_action": "Validate firewall telemetry, enrich source reputation, and confirm scan volume thresholds."
   },
   {
     "category": "login",
     "title": "suspicious authentication activity",
     "evidence": "2026-05-18T12:02:30Z auth failed password user=admin src=198.51.100.77",
-    "severity": "medium"
+    "severity": "medium",
+    "timestamp": "2026-05-18T12:02:30Z",
+    "source": "198.51.100.77",
+    "mitre_tactic": "Credential Access",
+    "recommended_action": "Review failed-login source, target account, and brute-force thresholds."
   },
   {
     "category": "login",
     "title": "suspicious authentication activity",
     "evidence": "2026-05-18T12:03:01Z auth accepted password user=admin src=198.51.100.77",
-    "severity": "high"
+    "severity": "high",
+    "timestamp": "2026-05-18T12:03:01Z",
+    "source": "198.51.100.77",
+    "mitre_tactic": "Credential Access",
+    "recommended_action": "Investigate successful authentication after failures and rotate credentials if unauthorized."
   }
 ]

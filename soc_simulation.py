@@ -41,18 +41,39 @@ def analyze_gaps(expected: list[str], detections: list[Detection]) -> dict[str, 
     }
 
 
+def summarize_simulation(expected: list[str], detections: list[Detection], gaps: dict[str, list[str]]) -> dict[str, object]:
+    severity_counts: dict[str, int] = {}
+    tactic_counts: dict[str, int] = {}
+    for detection in detections:
+        severity_counts[detection.severity] = severity_counts.get(detection.severity, 0) + 1
+        tactic_counts[detection.mitre_tactic] = tactic_counts.get(detection.mitre_tactic, 0) + 1
+    return {
+        "expected_signals": len(expected),
+        "detected_events": len(detections),
+        "covered_signals": len(gaps["covered"]),
+        "missing_signals": len(gaps["missing"]),
+        "coverage_percent": round((len(gaps["covered"]) / len(expected)) * 100, 1) if expected else 100.0,
+        "severity_counts": severity_counts,
+        "tactic_counts": tactic_counts,
+        "missing_categories": gaps["missing"],
+    }
+
+
 def build_timeline(detections: list[Detection]) -> str:
     lines = ["# SOC Incident Timeline", ""]
     if not detections:
         return "# SOC Incident Timeline\n\nNo detections were produced.\n"
-    for index, detection in enumerate(detections, start=1):
+    for index, detection in enumerate(sorted(detections, key=lambda item: item.timestamp), start=1):
         lines.extend(
             [
-                f"## {index}. {detection.title}",
+                f"## {index}. {detection.timestamp} - {detection.title}",
                 "",
                 f"- Category: {detection.category}",
                 f"- Severity: {detection.severity}",
+                f"- Source: {detection.source}",
+                f"- MITRE tactic: {detection.mitre_tactic}",
                 f"- Evidence: `{detection.evidence}`",
+                f"- Recommended action: {detection.recommended_action}",
                 "",
             ]
         )
@@ -60,19 +81,55 @@ def build_timeline(detections: list[Detection]) -> str:
 
 
 def build_gap_report(expected: list[str], gap_summary: dict[str, list[str]]) -> str:
+    coverage = round((len(gap_summary["covered"]) / len(expected)) * 100, 1) if expected else 100.0
     lines = [
         "# SOC Visibility Gap Analysis",
         "",
         f"- Expected signals: {len(expected)}",
         f"- Covered signals: {len(gap_summary['covered'])}",
         f"- Missing signals: {len(gap_summary['missing'])}",
+        f"- Coverage: {coverage}%",
         "",
         "## Covered",
         "",
     ]
     lines.extend(f"- {category}" for category in gap_summary["covered"] or ["None"])
     lines.extend(["", "## Missing", ""])
-    lines.extend(f"- {category}" for category in gap_summary["missing"] or ["None"])
+    for category in gap_summary["missing"] or ["None"]:
+        if category == "shell":
+            lines.append("- shell: add outbound process/network telemetry for command execution and reverse-shell patterns")
+        else:
+            lines.append(f"- {category}")
+    return "\n".join(lines).rstrip() + "\n"
+
+
+def build_triage_report(detections: list[Detection], gaps: dict[str, list[str]]) -> str:
+    high_priority = [detection for detection in detections if detection.severity == "high"]
+    lines = [
+        "# SOC Triage Handoff",
+        "",
+        "## High Priority Detections",
+        "",
+    ]
+    if not high_priority:
+        lines.append("No high-priority detections were produced.")
+    for detection in high_priority:
+        lines.extend(
+            [
+                f"### {detection.timestamp} - {detection.title}",
+                "",
+                f"- Category: {detection.category}",
+                f"- Source: {detection.source}",
+                f"- Tactic: {detection.mitre_tactic}",
+                f"- Action: {detection.recommended_action}",
+                "",
+            ]
+        )
+    lines.extend(["## Missing Visibility", ""])
+    if not gaps["missing"]:
+        lines.append("No expected signals are missing.")
+    for category in gaps["missing"]:
+        lines.append(f"- {category}")
     return "\n".join(lines).rstrip() + "\n"
 
 
@@ -89,6 +146,8 @@ def main() -> None:
     args.reports_dir.mkdir(parents=True, exist_ok=True)
     (args.reports_dir / "incident_timeline.md").write_text(build_timeline(detections), encoding="utf-8")
     (args.reports_dir / "gap_analysis.md").write_text(build_gap_report(expected, gaps), encoding="utf-8")
+    (args.reports_dir / "triage_handoff.md").write_text(build_triage_report(detections, gaps), encoding="utf-8")
+    (args.reports_dir / "summary.json").write_text(json.dumps(summarize_simulation(expected, detections, gaps), indent=2) + "\n", encoding="utf-8")
     (args.reports_dir / "detections.json").write_text(json.dumps([asdict(item) for item in detections], indent=2) + "\n", encoding="utf-8")
     print(f"Expected {len(expected)} signal(s)")
     print(f"Detected {len(detections)} event(s)")

@@ -1,0 +1,18 @@
+{
+  "expected_signals": 3,
+  "detected_events": 3,
+  "covered_signals": 2,
+  "missing_signals": 1,
+  "coverage_percent": 66.7,
+  "severity_counts": {
+    "medium": 2,
+    "high": 1
+  },
+  "tactic_counts": {
+    "Reconnaissance": 1,
+    "Credential Access": 2
+  },
+  "missing_categories": [
+    "shell"
+  ]
+}

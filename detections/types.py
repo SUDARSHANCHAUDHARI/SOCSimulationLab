@@ -11,3 +11,7 @@ class Detection:
     title: str
     evidence: str
     severity: str
+    timestamp: str
+    source: str
+    mitre_tactic: str
+    recommended_action: str
