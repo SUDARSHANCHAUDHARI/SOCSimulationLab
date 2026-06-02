@@ -12,3 +12,9 @@ requires-python = ">=3.10"
 
 [project.scripts]
 soc-sim = "main:main"
+
+[tool.setuptools]
+py-modules = ["main", "soc_simulation"]
+
+[tool.setuptools.packages.find]
+include = ["detections*"]
