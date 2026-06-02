@@ -1,87 +1,117 @@
 # SOC Simulation Lab
 
-[![Python](https://img.shields.io/badge/Python-3.12-blue)](#) [![Status](https://img.shields.io/badge/status-lab%20polish-green)](#) [![Security](https://img.shields.io/badge/security-defensive%20lab-purple)](#)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue)](#requirements)
+[![Status](https://img.shields.io/badge/status-MVP-green)](#status)
+[![Security](https://img.shields.io/badge/security-defensive%20lab-purple)](#safe-use)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-End-to-end SOC workflow simulator that maps attack scenarios to collected logs and visibility gaps.
+End-to-end SOC workflow simulator. Maps attack scenarios to collected logs, runs detections, and identifies visibility gaps to practice analyst triage and detection engineering.
 
-- **Portfolio group:** Cybersecurity lab project
-- **Status:** Lab polish implemented, tested, committed, and pushed to GitHub
-- **GitHub:** https://github.com/SUDARSHANCHAUDHARI/SOCSimulationLab
-- **Local path:** `/Users/screencloudsudarshan/SUDARSHAN_CODE/sudarshan_repos/CyberSecurity/SOCSimulationLab`
+---
 
-## MVP Snapshot
+## Overview
 
-This repository includes a working MVP with safe sample data, deterministic detection logic, local tests, generated SOC reports, summary JSON, triage handoff, and Docker demo support.
+SOC Simulation Lab is a defensive training and detection-engineering tool. You describe attack scenarios in YAML (what an attacker did, what telemetry should appear), feed in collected logs, and the lab runs login / scan / shell detection modules against them. The output is an end-to-end SOC scorecard: which scenarios were detected, which slipped through, and where coverage is weakest.
 
-## Safe Use
+## Features
 
-This project is defensive and analysis-focused. Use only with logs, systems, repositories, and lab environments you own or have permission to assess.
+- YAML attack scenario definitions
+- Login, scan, and shell detection modules
+- End-to-end coverage scoring per scenario
+- Identifies detection gaps and weakest signals
+- Outputs JSON detections, scenario coverage, Markdown report, and triage handoff
 
-## Core Features
+## Requirements
 
-- attack chain timeline
-- log collection
-- detection mapping
-- gap analysis
-- final SOC report
-- MITRE tactic mapping
-- summary JSON
-- triage handoff
+- Python 3.10 or newer
+- Linux, macOS, or Windows
+- No third-party Python packages (standard library only)
+- Optional: Docker for the demo container
 
-## Safety Note
-
-Keep this local and lab-only.
-
-
-## Install
+## Installation
 
 ```bash
+git clone https://github.com/SUDARSHANCHAUDHARI/SOCSimulationLab.git
+cd SOCSimulationLab
 pip install .
 ```
 
-This registers the `soc-sim` command. Or run directly:
+This registers the `soc-sim` CLI command.
+
+To run without installing:
 
 ```bash
 python3 main.py --help
 ```
 
-## Quick Start
+## Usage
+
+Run the simulator against the included scenarios and logs:
 
 ```bash
-python3 soc_simulation.py
-python3 -m unittest discover -s tests -p 'test_*.py'
+python3 main.py --logs data/collected-logs.log --scenarios attack-scenarios/*.yaml --out reports/report.md
 ```
 
-The simulation uses safe synthetic logs. It does not run exploit tooling.
+Generated outputs in `reports/`:
 
-Generated outputs:
+- `detections.json` — per-module detection results
+- `coverage.json` — scenario-to-detection coverage map
+- `summary.json` — overall coverage score and gaps
+- `report.md` — Markdown SOC scorecard
+- `triage.md` — analyst triage checklist
 
-- `reports/incident_timeline.md`
-- `reports/gap_analysis.md`
-- `reports/triage_handoff.md`
-- `reports/detections.json`
-- `reports/summary.json`
+## Project Structure
+
+```
+SOCSimulationLab/
+├── detections/       Login, scan, shell detection modules
+├── attack-scenarios/ YAML scenario definitions
+├── data/             Safe sample collected logs
+├── reports/          Example generated output
+├── docker/           Dockerfile + compose support
+├── docs/             Architecture, security notes, demo
+├── tests/            Unit tests
+├── soc_simulation.py End-to-end runner
+├── main.py           CLI entrypoint
+├── pyproject.toml    Package metadata
+└── LICENSE
+```
+
+## Testing
+
+```bash
+python3 -m unittest discover -s tests -p 'test_*.py'
+```
 
 ## Docker Demo
 
 ```bash
-docker compose run --rm soc-simulation
+docker compose run --rm soc-sim-demo
 ```
 
-## Lab Polish Capabilities
+## Safe Use
 
-- Loads expected scan, login, and shell signals from scenario files
-- Runs deterministic detection logic against collected SOC logs
-- Builds an incident timeline
-- Builds a visibility gap report
-- Writes machine-readable detection output
-- Adds source, timestamp, MITRE tactic, and recommended action metadata
-- Produces triage and executive summary outputs
+This project is defensive and training-focused. Use only with logs and lab environments you own or have explicit written permission to assess. The included samples are synthetic and safe for public demo use.
+
+## Status
+
+Working CLI MVP with tests, sample data, and Docker support.
 
 ## Roadmap
 
-- Add richer scenario metadata and schema validation
-- Add detection confidence scoring
-- Add timeline graph export
-- Add dashboard view for SOC review
-- Prepare a tagged lab-polish release
+- MITRE ATT&CK technique mapping per scenario
+- More detection modules (lateral movement, exfil, persistence)
+- Skill-tracking mode for analyst training
+- Web dashboard for live scenario runs
+- GitHub release `v0.1.0-mvp`
+
+## License
+
+Released under the [MIT License](LICENSE). You are free to use, modify, and distribute this software with attribution.
+
+## Author
+
+**Sudarshan Chaudhari** — [SudarshanTechLabs](https://github.com/SUDARSHANCHAUDHARI)
+Bangkok, Thailand
+
+For inquiries: open an issue on [GitHub](https://github.com/SUDARSHANCHAUDHARI/SOCSimulationLab/issues).
