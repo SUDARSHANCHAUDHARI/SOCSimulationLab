@@ -32,6 +32,19 @@ This project is defensive and analysis-focused. Use only with logs, systems, rep
 
 Keep this local and lab-only.
 
+
+## Install
+
+```bash
+pip install .
+```
+
+This registers the `soc-sim` command. Or run directly:
+
+```bash
+python3 main.py --help
+```
+
 ## Quick Start
 
 ```bash
