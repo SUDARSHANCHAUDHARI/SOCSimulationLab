@@ -9,6 +9,24 @@ End-to-end SOC workflow simulator. Maps attack scenarios to collected logs, runs
 
 ---
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Requirements](#requirements)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Project Structure](#project-structure)
+- [Testing](#testing)
+- [Docker Demo](#docker-demo)
+- [Safe Use](#safe-use)
+- [Status](#status)
+- [Roadmap](#roadmap)
+- [Documentation](#documentation)
+- [Contributing](#contributing)
+- [License](#license)
+- [About](#about)
+
 ## Overview
 
 SOC Simulation Lab is a defensive training and detection-engineering tool. You describe attack scenarios in YAML (what an attacker did, what telemetry should appear), feed in collected logs, and the lab runs login / scan / shell detection modules against them. The output is an end-to-end SOC scorecard: which scenarios were detected, which slipped through, and where coverage is weakest.
@@ -105,13 +123,47 @@ Working CLI MVP with tests, sample data, and Docker support.
 - Web dashboard for live scenario runs
 - GitHub release `v0.1.0-mvp`
 
+## Documentation
+
+Full project documentation lives in [`docs/`](docs/):
+
+- [Architecture](docs/ARCHITECTURE.md) — component design and data flow
+- [Demo](docs/DEMO.md) — step-by-step demo walkthrough
+- [Security Notes](docs/SECURITY_NOTES.md) — defensive-use guidance and threat model
+- [Production Readiness](docs/PRODUCTION_READINESS.md) — gaps between MVP and production
+- [Roadmap](docs/ROADMAP.md) — planned features
+- [Release Notes](docs/RELEASE_NOTES.md) — version history
+
+## Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) and the [Code of Conduct](CODE_OF_CONDUCT.md) before opening a pull request. To report a security issue, see [SECURITY.md](SECURITY.md).
+
 ## License
 
 Released under the [MIT License](LICENSE). You are free to use, modify, and distribute this software with attribution.
 
-## Author
+---
 
-**Sudarshan Chaudhari** — [SudarshanTechLabs](https://github.com/SUDARSHANCHAUDHARI)
-Bangkok, Thailand
+## About
 
-For inquiries: open an issue on [GitHub](https://github.com/SUDARSHANCHAUDHARI/SOCSimulationLab/issues).
+I'm Sudarshan Chaudhari, a Senior Quality Engineer, Test Automation specialist, and AI systems builder based in Bangkok, Thailand.
+
+I have 13+ years of experience in software quality engineering, working across SaaS, fintech, gaming, web, mobile, cloud, and digital signage platforms. My background combines hands-on test automation with QA leadership, test strategy, CI/CD, release quality, production investigation, and cross-platform validation.
+
+Alongside my professional QA career, I run [SudarshanTechLabs](https://sudarshantechlabs.com/), my independent engineering and product lab where I design, build, test, and ship software across Android, web, AI, cybersecurity, developer tooling, and cross-platform applications.
+
+### What I work on
+
+- ⚙️ **Quality Engineering & Test Automation** — Playwright, Selenium, Cypress, Appium, API testing, automation frameworks, end-to-end testing, CI/CD, release gates, GitHub Actions, risk-based testing, and production validation
+- 🤖 **AI Systems & Automation** — AI agents, multi-agent orchestration, MCP servers, AI-assisted QA, prompt tooling, developer workflows, automation systems, and Claude Code plugins
+- 📱 **Mobile & Cross-Platform Applications** — Android applications built with Kotlin and Jetpack Compose, Google Play releases, automated build and publishing pipelines, and cross-platform development spanning iOS, web, Windows, and macOS
+- 🌐 **Web Applications & Platforms** — Full-stack applications using Next.js, TypeScript, Firebase, Cloudflare, REST APIs, and modern web infrastructure
+- 🛠️ **Developer Tooling & CLI Engineering** — Rust, Python, TypeScript, CLI utilities, multi-repository tooling, build automation, release tooling, and engineering productivity systems
+- 🛡️ **Cybersecurity & Observability** — Threat detection, log analysis, security auditing, vulnerability assessment, monitoring, and security-focused developer tools
+- 📺 **Digital Signage & Device Platforms** — Content validation, playback testing, device compatibility, production investigation, monitoring, and QA across diverse hardware and operating-system environments
+
+My work sits at the intersection of quality engineering, automation, AI, and software development. I approach products with a QA mindset from the beginning: understanding failure modes, designing for testability, automating repetitive work, and building release confidence into the engineering process.
+
+Through SudarshanTechLabs, I also build products and tools from idea to production, covering architecture, development, testing, CI/CD, release automation, monitoring, and ongoing maintenance.
+
+🌐 [sudarshantechlabs.com](https://sudarshantechlabs.com/) · 💼 [LinkedIn](https://linkedin.com/in/sudarshan-chaudhari) · 🐙 [GitHub](https://github.com/SUDARSHANCHAUDHARI) · ✉️ [sunny.sudarshan@gmail.com](mailto:sunny.sudarshan@gmail.com)
